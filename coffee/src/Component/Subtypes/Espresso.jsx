@@ -1,4 +1,6 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import ristretto from '../../assets/images/Espresso/ristretto.jpg';
 import lungo from '../../assets/images/Espresso/lungo.jpg';
 import doppio from '../../assets/images/Espresso/doppio.jpeg';
@@ -71,6 +73,8 @@ const espresso = {
   
 
 export default function Espresso() {
+  const navigate = useNavigate(); 
+  
     return (
       <div className="relative py-16 px-4 md:px-16">
         
@@ -83,9 +87,17 @@ export default function Espresso() {
         {/* Content Over Background */}
         <div className="relative z-10">
           <div className="mb-12">
-            <h1 className="text-3xl md:text-4xl font-bold text-amber-800 pb-5">
-              {espresso.name}
-            </h1>
+          <div className="flex items-center gap-2 pb-5">
+          <button
+            onClick={() => navigate('/')}
+            className="text-3xl text-amber-800 hover:text-amber-700 transition cursor-pointer"
+          >
+            ←
+          </button>
+          <h1 className="text-3xl md:text-4xl font-bold text-amber-800">
+            {espresso.name}
+          </h1>
+        </div>
             <p className="text-gray-700 text-base">{espresso.description}</p>
           </div>
   

@@ -2,6 +2,7 @@ import React from 'react'
 import Main from './Main'
 import About from './About'
 import Typeofcoffee from './Typeofcoffee'
+import Last from './Subtypes/Last'
 
 export default function Homepage() {
   return (
@@ -9,6 +10,7 @@ export default function Homepage() {
         <Main/>
         <About/>
         <Typeofcoffee/>
+        <Last/>
     </div>
   )
 }

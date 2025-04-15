@@ -1,4 +1,6 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import classic from '../../assets/images/Macchiato/classic.jpg';
 import iced from '../../assets/images/Macchiato/ice.jpeg';
 import caramel from '../../assets/images/Macchiato/caramel.webp';
@@ -65,6 +67,8 @@ const macchiato = {
 };
 
 export default function Macchiato() {
+  const navigate = useNavigate(); 
+  
   return (
     <div className="relative py-16 px-4 md:px-16">
       
@@ -77,9 +81,17 @@ export default function Macchiato() {
       {/* Foreground */}
       <div className="relative z-10">
         <div className="mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-amber-800 pb-5">
-            {macchiato.name}
+        <div className="flex items-center gap-2 pb-5">
+          <button
+            onClick={() => navigate('/')}
+            className="text-3xl text-amber-800 hover:text-amber-700 transition cursor-pointer"
+          >
+            ←
+          </button>
+          <h1 className="text-3xl md:text-4xl font-bold text-amber-800">
+            {Macchiato.name}
           </h1>
+        </div>
           <p className="text-gray-700 text-base">{macchiato.description}</p>
         </div>
 

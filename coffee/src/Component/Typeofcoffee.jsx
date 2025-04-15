@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 import espresso from '../assets/images/Types/espresso.jpg';
 import latte from '../assets/images/Types/latte.jpg';
@@ -50,10 +52,15 @@ const coffeeTypes = [
 
 export default function Typeofcoffee() {
   const navigate = useNavigate();
+        useEffect(() => {
+          Aos.init({
+            duration: 1600,
+          });
+        }, []);
 
   return (
-    <div className="py-20 bg-white">
-      <h2 className="text-center text-3xl md:text-4xl font-bold text-amber-800 mb-12">
+    <div className="py-15 bg-white">
+      <h2 className="text-center text-3xl md:text-4xl font-bold text-amber-800 mb-12 drop-shadow-lg/30" data-aos="fade-up">
         Types of Coffee
       </h2>
       <div className="flex flex-col items-center justify-center h-full py-10">
@@ -61,6 +68,7 @@ export default function Typeofcoffee() {
           src={types}
           className="w-80 h-80 object-contain md:w-[500px] md:h-[500px]"
           alt="coffee types"
+          data-aos="fade-up"
         />
       </div>
       <div className="grid gap-16 px-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-6xl mx-auto py-10">
@@ -69,6 +77,7 @@ export default function Typeofcoffee() {
             key={index}
             className="cursor-pointer bg-white rounded-2xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105"
             onClick={() => navigate(coffee.route)}
+            data-aos="fade-up"
           >
             <img
               src={coffee.image}
