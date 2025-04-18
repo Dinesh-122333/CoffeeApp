@@ -89,7 +89,7 @@ export default function Macchiato() {
             ←
           </button>
           <h1 className="text-3xl md:text-4xl font-bold text-amber-800">
-            {Macchiato.name}
+            {macchiato.name}
           </h1>
         </div>
           <p className="text-gray-700 text-base">{macchiato.description}</p>
