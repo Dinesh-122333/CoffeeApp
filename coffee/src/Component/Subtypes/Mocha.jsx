@@ -88,7 +88,7 @@ export default function Mocha() {
             ←
           </button>
           <h1 className="text-3xl md:text-4xl font-bold text-amber-800">
-            {Mocha.name}
+            {mocha.name}
           </h1>
         </div>
           <p className="text-gray-700 text-base">{mocha.description}</p>
