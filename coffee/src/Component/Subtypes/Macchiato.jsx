@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Modal from '../Modal';
 
 import classic from '../../assets/images/Macchiato/classic.jpg';
 import iced from '../../assets/images/Macchiato/ice.jpeg';
@@ -17,6 +18,7 @@ const macchiato = {
       name: 'Classic Macchiato',
       image: classic,
       description: 'A simple espresso shot lightly "stained" with a dash of steamed milk.',
+      videoUrl: "https://www.youtube.com/embed/_3lhqCgFjdc",
       steps: [
         'Pull a single shot of espresso.',
         'Steam a small amount of milk.',
@@ -27,6 +29,7 @@ const macchiato = {
       name: 'Iced Macchiato',
       image: iced,
       description: 'A cold variation with layers of espresso and milk over ice.',
+      videoUrl: "https://www.youtube.com/embed/kQeLkQQckN0",
       steps: [
         'Fill glass with ice and milk.',
         'Pull 1–2 shots of espresso.',
@@ -37,6 +40,7 @@ const macchiato = {
       name: 'Caramel Macchiato',
       image: caramel,
       description: 'Layered espresso and milk topped with vanilla syrup and caramel drizzle.',
+      videoUrl: "https://www.youtube.com/embed/jgdokx6k9xA",
       steps: [
         'Add vanilla syrup and cold milk to a cup of ice.',
         'Pour espresso over the top.',
@@ -47,6 +51,7 @@ const macchiato = {
       name: 'Espresso Macchiato',
       image: espressoMac,
       description: 'A bold espresso shot topped with a tiny bit of milk foam.',
+      videoUrl: "https://www.youtube.com/embed/70APGXfyTTM",
       steps: [
         'Pull a shot of espresso.',
         'Froth a small quantity of milk.',
@@ -57,6 +62,7 @@ const macchiato = {
       name: 'Latte Macchiato',
       image: latteMac,
       description: 'Steamed milk with a shot of espresso poured over for a layered effect.',
+      videoUrl: "https://www.youtube.com/embed/ZnRDNh41dFg",
       steps: [
         'Steam and pour milk into a tall glass.',
         'Froth a thin layer of foam.',
@@ -68,7 +74,15 @@ const macchiato = {
 
 export default function Macchiato() {
   const navigate = useNavigate(); 
-  
+
+  const [showModal, setShowModal] = useState(false);
+  const [videoUrl, setVideoUrl] = useState("");
+
+  const openModal = (url) => {
+    setVideoUrl(url);
+    setShowModal(true);
+  };
+
   return (
     <div className="relative py-16 px-4 md:px-16">
       
@@ -116,6 +130,10 @@ export default function Macchiato() {
                     </li>
                   ))}
                 </ul>
+                {/* Open Video Modal */}
+                <button className="mt-3 p-1 text-amber-500 bg-amber-200 rounded-full cursor-pointer hover:bg-stone-50 border border-amber-500" onClick={() => openModal(coffee.videoUrl)}>
+                  Open Video
+                </button>
               </div>
 
               {/* Image */}
@@ -130,6 +148,7 @@ export default function Macchiato() {
           ))}
         </div>
       </div>
+      {showModal && <Modal videoUrl={videoUrl} onClose={() => setShowModal(false)} />}
     </div>
   );
 }

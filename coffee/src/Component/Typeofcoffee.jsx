@@ -59,7 +59,7 @@ export default function Typeofcoffee() {
         }, []);
 
   return (
-    <div className="py-15 bg-white">
+    <div className="py-15 bg-white ">
       <h2 className="text-center text-3xl md:text-4xl font-bold text-amber-800 mb-12 drop-shadow-lg/30" data-aos="fade-up">
         Types of Coffee
       </h2>
@@ -75,7 +75,7 @@ export default function Typeofcoffee() {
         {coffeeTypes.map((coffee, index) => (
           <div
             key={index}
-            className="cursor-pointer bg-white rounded-2xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105"
+            className="cursor-pointer bg-white rounded-2xl shadow-lg hover:shadow-xl transition duration-700 ease-in-out transform hover:scale-105"
             onClick={() => navigate(coffee.route)}
             data-aos="fade-up"
           >

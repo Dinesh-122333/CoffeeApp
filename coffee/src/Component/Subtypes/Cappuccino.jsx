@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Modal from '../Modal';
 
 import traditional from '../../assets/images/Cappuccino/traditional.jpg';
 import iced from '../../assets/images/Cappuccino/iced.webp';
@@ -17,6 +18,7 @@ const cappuccino = {
       name: 'Traditional Cappuccino',
       image: traditional,
       description: 'Balanced layers of espresso, steamed milk, and milk foam.',
+      videoUrl: "https://www.youtube.com/embed/3zBcpK52ZSM",
       steps: [
         'Pull 1 shot of espresso into a cup.',
         'Steam milk until foamy.',
@@ -27,6 +29,7 @@ const cappuccino = {
       name: 'Iced Cappuccino',
       image: iced,
       description: 'A chilled version with cold milk and foam served over ice.',
+      videoUrl: "https://www.youtube.com/embed/FjFQipIaQKQ",
       steps: [
         'Pull a double shot of espresso.',
         'Add cold milk and stir.',
@@ -37,6 +40,7 @@ const cappuccino = {
       name: 'Dry Cappuccino',
       image: dry,
       description: 'Foam-heavy with less milk, for a stronger espresso flavor.',
+      videoUrl: "https://www.youtube.com/embed/tQ70tUiyUgg",
       steps: [
         'Brew 1–2 shots of espresso.',
         'Froth milk heavily (minimal liquid).',
@@ -47,6 +51,7 @@ const cappuccino = {
       name: 'Wet Cappuccino',
       image: wet,
       description: 'More steamed milk than foam, creamier and smoother.',
+      videoUrl: "https://www.youtube.com/embed/4jisWum2gW4",
       steps: [
         'Prepare a shot of espresso.',
         'Steam milk with little foam.',
@@ -57,6 +62,7 @@ const cappuccino = {
       name: 'Flavored Cappuccino',
       image: flavored,
       description: 'Infused with flavors like vanilla, caramel, or hazelnut.',
+      videoUrl: "https://www.youtube.com/embed/EC8fS8AR8hs",
       steps: [
         'Pull a shot of espresso.',
         'Add flavored syrup of choice.',
@@ -68,6 +74,13 @@ const cappuccino = {
 
 export default function Cappuccino() {
   const navigate = useNavigate(); 
+  const [showModal, setShowModal] = useState(false);
+    const [videoUrl, setVideoUrl] = useState("");
+  
+    const openModal = (url) => {
+      setVideoUrl(url);
+      setShowModal(true);
+    };
   
   return (
     <div className="relative py-16 px-4 md:px-16">
@@ -117,6 +130,10 @@ export default function Cappuccino() {
                     </li>
                   ))}
                 </ul>
+                 {/* Open Video Modal */}
+                 <button className="mt-3 p-1 text-amber-500 bg-amber-200 rounded-full cursor-pointer hover:bg-stone-50 border border-amber-500" onClick={() => openModal(coffee.videoUrl)}>
+                  Open Video
+                </button>
               </div>
 
               {/* Right Image */}
@@ -131,6 +148,7 @@ export default function Cappuccino() {
           ))}
         </div>
       </div>
+      {showModal && <Modal videoUrl={videoUrl} onClose={() => setShowModal(false)} />}
     </div>
   );
 }

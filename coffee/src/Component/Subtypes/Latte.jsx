@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Modal from '../Modal';
 
 import classic from '../../assets/images/Latte/classic.jpeg';
 import iced from '../../assets/images/Latte/ice.jpg';
@@ -17,6 +18,7 @@ const latte = {
       name: 'Classic Latte',
       image: classic,
       description: 'A traditional espresso drink with steamed milk and light foam.',
+      videoUrl: "https://www.youtube.com/embed/0PN0MwTcbxI",
       steps: [
         'Pull 1 shot of espresso.',
         'Steam milk until smooth and velvety.',
@@ -27,6 +29,7 @@ const latte = {
       name: 'Iced Latte',
       image: iced,
       description: 'A chilled latte served over ice for a refreshing twist.',
+      videoUrl: "https://www.youtube.com/embed/DCG6SngV9yI",
       steps: [
         'Pull 1–2 shots of espresso.',
         'Add cold milk to a glass of ice.',
@@ -37,6 +40,7 @@ const latte = {
       name: 'Flavored Latte',
       image: flavored,
       description: 'Infused with syrups like vanilla, caramel, or hazelnut.',
+      videoUrl: "https://www.youtube.com/embed/PziRf6lLZLU",
       steps: [
         'Add flavored syrup to the cup.',
         'Pull a shot of espresso over it.',
@@ -47,6 +51,7 @@ const latte = {
       name: 'Matcha Latte',
       image: matcha,
       description: 'Made with matcha green tea powder and steamed milk.',
+      videoUrl: "https://www.youtube.com/embed/eOnwuHhLNSo",
       steps: [
         'Whisk matcha powder with hot water.',
         'Steam milk until creamy.',
@@ -57,6 +62,7 @@ const latte = {
       name: 'Chai Latte',
       image: chai,
       description: 'Spiced black tea concentrate with steamed milk.',
+      videoUrl: "https://www.youtube.com/embed/akQDMTmuWww",
       steps: [
         'Heat chai tea concentrate.',
         'Steam milk until frothy.',
@@ -67,7 +73,15 @@ const latte = {
 };
 
 export default function Latte() {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
+    
+    const [showModal, setShowModal] = useState(false);
+    const [videoUrl, setVideoUrl] = useState("");
+  
+    const openModal = (url) => {
+      setVideoUrl(url);
+      setShowModal(true);
+    };
   
   return (
     <div className="relative py-16 px-4 md:px-16">
@@ -116,6 +130,10 @@ export default function Latte() {
                     </li>
                   ))}
                 </ul>
+                {/* Open Video Modal */}
+                <button className="mt-3 p-1 text-amber-500 bg-amber-200 rounded-full cursor-pointer hover:bg-stone-50 border border-amber-500" onClick={() => openModal(coffee.videoUrl)}>
+                  Open Video
+                </button>
               </div>
 
               {/* Right Image */}
@@ -130,6 +148,7 @@ export default function Latte() {
           ))}
         </div>
       </div>
+      {showModal && <Modal videoUrl={videoUrl} onClose={() => setShowModal(false)} />}
     </div>
   );
 }

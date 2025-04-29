@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Modal from '../Modal';
 
 import ristretto from '../../assets/images/Espresso/ristretto.jpg';
 import lungo from '../../assets/images/Espresso/lungo.jpg';
@@ -18,6 +19,7 @@ const espresso = {
         image: ristretto,
         description:
           'A more concentrated shot of espresso using less water. It’s bolder and richer than a regular espresso.',
+        videoUrl: "https://www.youtube.com/embed/bMRrWqb9wSE",
         steps: [
           'Grind coffee finer than espresso.',
           'Use the same amount of coffee, but half the water.',
@@ -29,6 +31,7 @@ const espresso = {
         image: lungo,
         description:
           'A “long” espresso made with more water, resulting in a lighter flavor with more caffeine.',
+        videoUrl: "https://www.youtube.com/embed/AokZP_ja4tw",
         steps: [
           'Use a standard espresso grind.',
           'Double the water (around 60ml).',
@@ -40,6 +43,7 @@ const espresso = {
         image: doppio,
         description:
           'A double shot of espresso for a stronger kick. Twice the volume, twice the strength.',
+        videoUrl: "https://www.youtube.com/embed/fKC-WRzmHXw",
         steps: [
           'Use double the coffee (about 18–20g).',
           'Tamp evenly and place in a double-shot portafilter.',
@@ -51,7 +55,8 @@ const espresso = {
         image: affogato,
         description:
           'A scoop of vanilla ice cream "drowned" with a shot of hot espresso. Dessert meets coffee.',
-        steps: [
+        videoUrl: "https://www.youtube.com/embed/q7LMMuwEQ7Q",
+          steps: [
           'Place a scoop of vanilla ice cream in a cup.',
           'Brew a fresh shot of espresso.',
           'Pour the espresso directly over the ice cream.'
@@ -62,7 +67,8 @@ const espresso = {
         image: espressoconpanna,
         description:
           'A shot of espresso topped with whipped cream, offering a creamy finish.',
-        steps: [
+        videoUrl: "https://www.youtube.com/embed/Q6NfAedj3yk",
+          steps: [
           'Brew a single shot of espresso.',
           'Top with a dollop of whipped cream.',
           'Serve immediately while hot.'
@@ -74,6 +80,13 @@ const espresso = {
 
 export default function Espresso() {
   const navigate = useNavigate(); 
+  const [showModal, setShowModal] = useState(false);
+  const [videoUrl, setVideoUrl] = useState("");
+
+  const openModal = (url) => {
+    setVideoUrl(url);
+    setShowModal(true);
+  };
   
     return (
       <div className="relative py-16 px-4 md:px-16">
@@ -122,6 +135,10 @@ export default function Espresso() {
                         </li>
                     ))}
                     </ul>
+                    {/* Open Video Modal */}
+                    <button className="mt-3 p-1 text-amber-500 bg-amber-200 rounded-full cursor-pointer hover:bg-stone-50 border border-amber-500" onClick={() => openModal(coffee.videoUrl)}>
+                      Open Video
+                    </button>
                 </div>
   
                 {/* Right Image */}
@@ -136,6 +153,7 @@ export default function Espresso() {
             ))}
           </div>
         </div>
+        {showModal && <Modal videoUrl={videoUrl} onClose={() => setShowModal(false)} />}
       </div>
     );
   }

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Modal from '../Modal';
 
 import classic from '../../assets/images/Mocha/classic.webp';
 import whiteChoco from '../../assets/images/Mocha/white-chocolate.jpg';
@@ -17,6 +18,7 @@ const mocha = {
       name: 'Classic Mocha',
       image: classic,
       description: 'A comforting combination of espresso, chocolate syrup, and steamed milk.',
+      videoUrl: "https://www.youtube.com/embed/g86JjlpegIM",
       steps: [
         'Pull a shot of espresso.',
         'Add chocolate syrup to the espresso.',
@@ -27,6 +29,7 @@ const mocha = {
       name: 'White Chocolate Mocha',
       image: whiteChoco,
       description: 'A sweeter twist using white chocolate instead of dark chocolate.',
+      videoUrl: "https://www.youtube.com/embed/tbZHhq6GQK0",
       steps: [
         'Pull espresso shot into the cup.',
         'Stir in white chocolate sauce.',
@@ -37,6 +40,7 @@ const mocha = {
       name: 'Iced Mocha',
       image: icedMocha,
       description: 'A chilled mocha with espresso, milk, and chocolate over ice.',
+      videoUrl: "https://www.youtube.com/embed/AqXmR4hFZ1M",
       steps: [
         'Mix chocolate and espresso together.',
         'Pour over ice and add cold milk.',
@@ -47,6 +51,7 @@ const mocha = {
       name: 'Peppermint Mocha',
       image: peppermint,
       description: 'A seasonal favorite with peppermint syrup added to the classic mocha.',
+      videoUrl: "https://www.youtube.com/embed/EOGMyeLZyaE",
       steps: [
         'Add chocolate and peppermint syrup to espresso.',
         'Stir well and pour in steamed milk.',
@@ -57,6 +62,7 @@ const mocha = {
       name: 'Mocha Frappuccino',
       image: frappuccino,
       description: 'A blended iced coffee drink with mocha flavor, perfect for hot days.',
+      videoUrl: "https://www.youtube.com/embed/uNA4xM_mOiQ",
       steps: [
         'Blend ice, milk, espresso, and mocha syrup.',
         'Pour into a glass.',
@@ -67,8 +73,16 @@ const mocha = {
 };
 
 export default function Mocha() {
-  const navigate = useNavigate(); 
-  
+  const navigate = useNavigate();
+
+  const [showModal, setShowModal] = useState(false);
+  const [videoUrl, setVideoUrl] = useState("");
+
+  const openModal = (url) => {
+    setVideoUrl(url);
+    setShowModal(true);
+  };
+
   return (
     <div className="relative py-16 px-4 md:px-16">
       {/* Background */}
@@ -115,6 +129,9 @@ export default function Mocha() {
                     </li>
                   ))}
                 </ul>
+                <button className="mt-3 p-1 text-amber-500 bg-amber-200 rounded-full cursor-pointer hover:bg-stone-50 border border-amber-500" onClick={() => openModal(coffee.videoUrl)}>
+                  Open Video
+                </button>
               </div>
 
               {/* Image */}
@@ -129,6 +146,7 @@ export default function Mocha() {
           ))}
         </div>
       </div>
+      {showModal && <Modal videoUrl={videoUrl} onClose={() => setShowModal(false)} />}
     </div>
   );
 }
