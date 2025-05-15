@@ -1,13 +1,15 @@
 // AIzaSyD6CEcUXp-YIb1mwI6YNGHpcoOhKb2j4Ks
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
+import Aos from "aos";
+import "aos/dist/aos.css";
 import points from "../assets/images/points.png";
 
 const mapContainerStyle = {
-    width: "75%",
-    height: "500px",
-    margin: "auto",
-};
+    width: "100%",
+    height: "50vh", // Adjust height based on screen size
+  };
+  
 
 const center = { lat: 13.0827, lng: 80.2707 }; // Centered on Chennai, India
 
@@ -360,17 +362,24 @@ const coffeeData = [
 
 
 export default function Mapsearch() {
+    useEffect(() => {
+      Aos.init({
+        duration: 1600,
+      });
+    }, []);
+  
+
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [hoveredCountry, setHoveredCountry] = useState(null);
 
     return (
         <>
             <div className="py-4">
-                <h1 className="text-amber-700 font-bold text-4xl md:text-5xl mb-6 drop-shadow-lg text-center">
+                <h1 className="text-amber-700 font-bold text-4xl md:text-5xl mb-6 drop-shadow-lg text-center" data-aos="fade-up">
                     Discover the Coffees Around the World
                 </h1>
             </div>
-            <div className="py-10 px-24 flex justify-between gap-10">
+            <div className="py-10 px-6 md:px-12 lg:px-24 flex flex-col md:flex-row justify-between gap-6">
                 <LoadScript googleMapsApiKey="AIzaSyD6CEcUXp-YIb1mwI6YNGHpcoOhKb2j4Ks">
                     <GoogleMap mapContainerStyle={mapContainerStyle} center={center} zoom={3}>
                         {Object.entries(coffeeLocations).map(([country, location]) => (
