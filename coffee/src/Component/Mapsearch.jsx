@@ -7,7 +7,7 @@ import points from "../assets/images/points.png";
 
 const mapContainerStyle = {
     width: "100%",
-    height: "50vh", // Adjust height based on screen size
+    height: "100vh", // Adjust height based on screen size
   };
   
 
