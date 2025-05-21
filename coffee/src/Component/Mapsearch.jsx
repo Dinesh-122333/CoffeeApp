@@ -380,7 +380,7 @@ export default function Mapsearch() {
                 </h1>
             </div>
             <div className="py-10 px-6 md:px-12 lg:px-24 flex flex-col md:flex-row justify-between gap-6">
-                <LoadScript googleMapsApiKey="AIzaSyD6CEcUXp-YIb1mwI6YNGHpcoOhKb2j4Ks">
+                <LoadScript googleMapsApiKey= GOOGLE_MAPS_API_KEY>
                     <GoogleMap mapContainerStyle={mapContainerStyle} center={center} zoom={3}>
                         {Object.entries(coffeeLocations).map(([country, location]) => (
                             <Marker
